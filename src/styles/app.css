@@ -1,0 +1,177 @@
+.rooms-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.rooms-title {
+  font-weight: 600;
+}
+
+.badge {
+  background: #0ea5e9;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+}
+
+.badge.warn {
+  background: #ef4444;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+}
+
+.user-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.user-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.user-pill .dot.online {
+  background: #22c55e;
+}
+
+.user-pill .name {
+  white-space: nowrap;
+}
+
+/* Mode disclaimer modal styles */
+.mode-disclaimer-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 2200;
+}
+.mode-disclaimer-box {
+  background: #fff;
+  color: #b91c1c;
+  padding: 20px 22px;
+  border-radius: 12px;
+  width: 460px;
+  max-width: 94%;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(2, 6, 23, 0.65);
+}
+.mode-disclaimer-icon {
+  font-size: 46px;
+  margin-bottom: 8px;
+}
+.mode-disclaimer-text {
+  font-weight: 700;
+  line-height: 1.45;
+  color: #b91c1c;
+}
+
+.chat-subheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.chat-subheader .peer-name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.room-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.room-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.room-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== FORCE LONGDO POPUP OVERRIDE (NUCLEAR MODE) ===== */
+body div.ldmap_placeholder.ldmap_frame.ldmap_popup.ldmap_selectable {
+  all: unset !important;
+  position: absolute !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  border: 1px solid #ddd !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Title */
+div.ldmap_placeholder.ldmap_frame.ldmap_popup.ldmap_selectable .ldmap_title {
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  margin-bottom: 6px !important;
+}
+
+/* Content */
+div.ldmap_placeholder.ldmap_frame.ldmap_popup.ldmap_selectable .ldmap_element {
+  color: #f5f5f5 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+/* Close button */
+div.ldmap_placeholder.ldmap_frame.ldmap_popup.ldmap_selectable
+  .ldmap_popup_close {
+  color: #ccc !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+@import "./styles/base.css";
+@import "./styles/header.css";
+@import "./styles/navbar.css";
+@import "./styles/forms.css";
+@import "./styles/buttons.css";
+@import "./styles/controls.css";
+@import "./styles/sections.css";
+@import "./styles/map.css";
+@import "./styles/panels.css";
+@import "./styles/responsive.css";
+@import "./styles/chat.css";
+@import "./styles/main.css";

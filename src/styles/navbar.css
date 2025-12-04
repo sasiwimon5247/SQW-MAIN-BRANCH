@@ -1,0 +1,466 @@
+.navbar {
+  position: absolute;
+  left: 12px;
+  top: 110px;
+  width: 307px;
+  max-height: calc(100vh - 150px);
+  height: auto;
+  background: #1e293b;
+  color: #0f172a;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  z-index: 200;
+}
+
+.navbar::-webkit-scrollbar {
+  display: none;
+}
+
+.control-section {
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1rem;
+}
+
+.section-header {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #f1f5f9;
+}
+
+.engine-info {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1rem;
+}
+
+.nav-btn {
+  padding: 0.5rem 0.8rem;
+  background: transparent;
+  border: 1px solid #475569;
+  color: #e2e8f0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.nav-btn.active {
+  background: #334155;
+  border-color: #64748b;
+}
+
+.nav-btn:hover {
+  background: #334155;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 1rem;
+}
+
+.dashboard {
+  background: #ffffff; /* พื้นหลังสีขาว */
+  border-radius: 16px; /* มุมโค้งมน */
+  padding: 20px 24px; /* เว้นระยะด้านใน */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* เงาเบาๆ */
+  font-family: "Sarabun", sans-serif;
+  max-width: 320px; /* ความกว้างสูงสุด */
+  color: #333;
+}
+
+.dashboard > div:first-child {
+  font-size: 1.25rem; /* ตัวใหญ่กว่าปกติ */
+  font-weight: 700; /* หนา */
+  margin-bottom: 12px;
+  color: #1e40af; /* ฟ้าเข้ม */
+  border-bottom: 2px solid #e5e7eb; /* เส้นใต้ */
+  padding-bottom: 6px;
+}
+
+.dashboard > div:last-child {
+  line-height: 1.6; /* ระยะห่างบรรทัด */
+  font-size: 0.95rem;
+}
+
+.dashboard > div:last-child br {
+  margin-bottom: 6px;
+}
+
+.flex-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 130px));
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.dashboard {
+  background: white;
+  border-radius: 16px;
+  padding: 15px 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.dashboard:nth-child(2):before {
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.dashboard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-number {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #2d3748;
+  margin-bottom: 8px;
+  text-align: center;
+  display: block;
+}
+
+.dashboard-label {
+  font-size: 0.8rem !important;
+  color: #718096;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.dashboard-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  opacity: 0.1;
+}
+
+.land-plots .dashboard-icon:before {
+  content: "🏞️";
+}
+
+.owners .dashboard-icon:before {
+  content: "👥";
+}
+
+.area .dashboard-icon:before {
+  content: "📐";
+}
+
+.value .dashboard-icon:before {
+  content: "💰";
+}
+
+.highlight {
+  font-size: 0.8rem !important;
+  color: #4299e1;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard {
+    padding: 25px 20px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.dashboard:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.dashboard:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dashboard:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.dashboard:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* === Flood Tool Grid === */
+.flood-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  justify-items: center;
+  padding: 8px;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* ปุ่มไอคอนกลม */
+.btn-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  background: #f3f4f6;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.btn-icon:hover {
+  transform: scale(1.1);
+  background: #e0e7ff;
+}
+.btn-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ระดับน้ำ */
+.btn-icon.low {
+  color: #3b82f6;
+}
+.btn-icon.med {
+  color: #2563eb;
+}
+.btn-icon.high {
+  color: #1e40af;
+}
+
+/* ปุ่ม action */
+.btn-icon.success {
+  background: #22c55e;
+  color: white;
+}
+.btn-icon.success:hover {
+  background: #16a34a;
+}
+
+.btn-icon.cancel {
+  background: #9ca3af;
+  color: white;
+}
+.btn-icon.cancel:hover {
+  background: #6b7280;
+}
+
+.btn-icon.danger {
+  background: #ef4444;
+  color: white;
+}
+.btn-icon.danger:hover {
+  background: #dc2626;
+}
+
+/* ตัวอักษรเล็ก L/M/H */
+.btn-icon small {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: -2px;
+}
+
+.flood-summary-box {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.flood-summary-box h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #0f172a;
+}
+
+.flood-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 8px 0;
+  color: white;
+  font-weight: 600;
+}
+
+.summary-card .label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.summary-card .count {
+  font-size: 1.2rem;
+  margin-top: 2px;
+}
+
+.summary-card.high {
+  background: #ef4444;
+} /* แดง */
+.summary-card.medium {
+  background: #f97316;
+} /* ส้ม */
+.summary-card.low {
+  background: #3b82f6;
+} /* ฟ้า */
+.summary-card.none {
+  background: #22c55e;
+} /* เขียว */
+
+/* Modern layout and additional styles for redesigned bar */
+.login-bar.modern {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+.login-bar .left,
+.login-bar .center,
+.login-bar .right {
+  display: flex;
+  align-items: center;
+}
+.login-bar .left {
+  flex: 0 0 auto;
+}
+.login-bar .center {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+.login-bar .right {
+  flex: 0 0 auto;
+}
+
+.control-group .icon-btn {
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #333;
+}
+.control-group .icon-btn:hover {
+  background: rgba(0, 0, 0, 0.03);
+  transform: translateY(-2px);
+}
+
+.user-pill {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: transparent;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.user-meta .user-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: #000000;
+}
+.user-meta .user-sub {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.compact-form {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: 6px;
+}
+
+/* ensure the whole bar never exceeds 80px visually */
+.top-strip {
+  min-height: 48px;
+  height: auto;
+}
+
+/* responsive: keep auth inputs usable on very small screens (stack vertically) */
+@media (max-width: 520px) {
+  .compact-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .compact-form input {
+    display: block;
+    width: 160px;
+    max-width: 60vw;
+  }
+  .login-btn {
+    padding: 6px 8px;
+    width: auto;
+  }
+  .actions {
+    flex-direction: row;
+  }
+  .actions .reg-btn {
+    display: inline-flex;
+  }
+}
