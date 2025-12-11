@@ -163,15 +163,15 @@ div.ldmap_placeholder.ldmap_frame.ldmap_popup.ldmap_selectable
   font-weight: bold !important;
 }
 
-@import "./styles/base.css";
-@import "./styles/header.css";
-@import "./styles/navbar.css";
-@import "./styles/forms.css";
-@import "./styles/buttons.css";
-@import "./styles/controls.css";
-@import "./styles/sections.css";
-@import "./styles/map.css";
-@import "./styles/panels.css";
-@import "./styles/responsive.css";
-@import "./styles/chat.css";
-@import "./styles/main.css";
+@import "./base.css";
+@import "./header.css";
+@import "./navbar.css";
+@import "./forms.css";
+@import "./buttons.css";
+@import "./controls.css";
+@import "./sections.css";
+@import "./map.css";
+@import "./panels.css";
+@import "./responsive.css";
+@import "./chat.css";
+@import "./main.css";

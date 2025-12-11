@@ -36,4 +36,18 @@
 </template>
 
 <script src="./app-script2.js"></script>
-<style>@import "./styles/app.css";</style>
+<style>
+   @import "styles/app.css";
+   @import "styles/base.css";
+   @import "styles/header.css";
+   @import "styles/navbar.css";
+   @import "styles/forms.css";
+   @import "styles/buttons.css";
+   @import "styles/controls.css";
+   @import "styles/sections.css";
+   @import "styles/map.css";
+   @import "styles/panels.css";
+   @import "styles/responsive.css";
+   @import "styles/chat.css";
+   @import "styles/main.css";
+</style>

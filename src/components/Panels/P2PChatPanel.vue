@@ -123,5 +123,5 @@
 </template>
 
 
-<script src="./app-script2.js"></script>
-<style>@import "./styles/app.css";</style>
+<script src="../../app-script2.js"></script>
+<style>@import "../../styles/app.css";</style>

@@ -31,7 +31,7 @@ import ActionButtons from "./components/Shared/ActionButtons.vue";
 import * as turf from "@turf/turf";
 /* eslint-disable no-empty */
 export default {
-  name: "App",
+  name: "App-ver2",
   components: { LoginBar,
         ModeDisclaimerModal,
         ModeSelect,

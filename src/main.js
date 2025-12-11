@@ -1,6 +1,6 @@
 // src/main.js
 import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App-ver2.vue'
 import LongdoMap from 'longdo-map-vue'
 import './firebase'
 
