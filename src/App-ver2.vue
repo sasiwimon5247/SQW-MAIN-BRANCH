@@ -5,7 +5,7 @@
       <RouterView v-if="false" />
     </header>
     <div v-if="showModeDisclaimerModal" class="mode-disclaimer-overlay">
-        <ModeDisclaimerModal />
+        <ModeDisclaimerModal @close="showModeDisclaimerModal = false" />
     </div>
     <div v-if="!currentMode" class="mode-select fullscreen">
       <!-- เวลาเลือกโหมด จะ emit event 'select' ขึ้นมา → เรียก method selectMode ใน app-script2.js -->
@@ -17,8 +17,12 @@
         <LandDashboard :dashboard="dashboard" />
         <ActionButtons />
         <div class="form-section">
-            <LandInfoForm />
-            <LandListPanel />
+          <LandInfoForm :landData="landData" @save="saveLandData" />
+          <LandListPanel
+            :savedLands="savedLands"
+            @focus-land="focusLand"
+            @delete-land="deleteLandItem"
+          />
         </div>
       </nav>
     </div>

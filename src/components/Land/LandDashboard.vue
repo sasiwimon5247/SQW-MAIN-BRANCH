@@ -1,25 +1,28 @@
 <template>
-  <!-- Navigation Buttons -->
+  <!-- Navigation / Dashboard Row -->
   <div class="flex-container">
+    <!-- จำนวนแปลง -->
     <div class="dashboard land-plots">
       <span class="dashboard-number">
-        {{ dashboard.plots.toLocaleString() }}
+        {{ fmtInt(dashboard.plots) }}
         <span class="highlight">ประกาศ</span>
       </span>
       <div class="dashboard-label">ที่ดินทั้งหมด</div>
     </div>
 
+    <!-- จำนวนรวม (ไร่) -->
     <div class="dashboard area">
       <span class="dashboard-number">
-        {{ fmt2(dashboard.areaRai) }}
+        {{ fmtRai(dashboard.areaRai) }}
         <span class="highlight"> ไร่</span>
       </span>
       <div class="dashboard-label">จำนวนรวม</div>
     </div>
 
+    <!-- มูลค่าที่ดินรวม (ล้านบาท) -->
     <div class="dashboard value">
       <span class="dashboard-number">
-        {{ fmt(dashboard.totalValueMillion) }}
+        {{ fmtMillion(dashboard.totalValueMillion) }}
       </span>
       <div class="dashboard-label">
         <span class="highlight">ล้านบาท</span>
@@ -32,25 +35,35 @@
 <script>
 export default {
   name: "LandDashboard",
+
   props: {
-    // รับ object dashboard มาจาก App (computed ใน app-script2.js)
+    // รับ dashboard จาก App (computed dashboard() ใน app-script2.js)
     dashboard: {
       type: Object,
-      required: true,
+      default: () => ({
+        plots: 0,
+        areaRai: 0,
+        totalValueMillion: 0,
+      }),
     },
   },
+
   methods: {
-    // format จำนวนไร่
-    fmt2(v) {
-      if (v == null || isNaN(v)) return "0";
-      return Number(v).toLocaleString(undefined, {
+    fmtInt(v) {
+      if (v == null || Number.isNaN(v)) return "0";
+      return Number(v).toLocaleString("th-TH", {
+        maximumFractionDigits: 0,
+      });
+    },
+    fmtRai(v) {
+      if (v == null || Number.isNaN(v)) return "0";
+      return Number(v).toLocaleString("th-TH", {
         maximumFractionDigits: 2,
       });
     },
-    // format มูลค่ารวม (ล้านบาท)
-    fmt(v) {
-      if (v == null || isNaN(v)) return "0";
-      return Number(v).toLocaleString(undefined, {
+    fmtMillion(v) {
+      if (v == null || Number.isNaN(v)) return "0";
+      return Number(v).toLocaleString("th-TH", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       });
