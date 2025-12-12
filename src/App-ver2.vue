@@ -8,12 +8,13 @@
         <ModeDisclaimerModal />
     </div>
     <div v-if="!currentMode" class="mode-select fullscreen">
-        <ModeSelect />
+      <!-- เวลาเลือกโหมด จะ emit event 'select' ขึ้นมา → เรียก method selectMode ใน app-script2.js -->
+      <ModeSelect @select="selectMode" />
     </div>
     <div v-else-if="currentMode === 'sale'">
       <nav class="navbar">
         <MapControls />
-        <LandDashboard />
+        <LandDashboard :dashboard="dashboard" />
         <ActionButtons />
         <div class="form-section">
             <LandInfoForm />
@@ -27,10 +28,45 @@
       </aside>
     </main>
     <section class="right-panel">
-        <MapContainer />
-        <SearchPanel />
-        <FiltersPanel />
-        <P2PChatPanel />
+      <MapContainer />
+
+      <SearchPanel
+        :showSearch="showSearch"
+        :searchQuery="searchQuery"
+        @update:searchQuery="searchQuery = $event"
+        @search="performSearch"
+        @locate-gps="locateByGPS"
+        @close="showSearch = false"
+      />
+
+      <FiltersPanel
+        :showFilters="showFilters"
+        :filters="filters"
+        @apply="applyFilters"
+        @reset="resetFilters"
+        @close="showFilters = false"
+      />
+
+      <P2PChatPanel
+        :showChat="showChat"
+        :chatMode="chatMode"
+        :messages="chatMessages"
+        :chatRooms="chatRooms"
+        :onlineUsers="onlineUsers"
+        :selectedUser="selectedUser"
+        :chatInput="chatInput"
+        :tempUserName="tempUserName"
+        :userProfile="userProfile"
+        :unreadCount="unreadCount"
+        @update:chatInput="chatInput = $event"
+        @update:tempUserName="tempUserName = $event"
+        @set-profile="setUserProfile"
+        @select-user="selectUserToChat"
+        @select-room="selectChatRoom"
+        @back-to-rooms="backToRooms"
+        @send="sendMessage"
+        @close="showChat = false"
+      />
     </section>
   </div>
 </template>

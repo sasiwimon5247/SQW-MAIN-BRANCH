@@ -13,5 +13,18 @@
   </div>
 </template>
 
-<script src="../../app-script2.js"></script>
-<style>@import "../../styles/app.css";</style>
+<script>
+export default {
+  name: "ModeSelect",
+  methods: {
+    selectMode(mode) {
+      // ส่ง event ชื่อ "select" ไปให้ component แม่
+      this.$emit("select", mode);
+    },
+  },
+};
+</script>
+
+<style>
+@import "../../styles/app.css";
+</style>
