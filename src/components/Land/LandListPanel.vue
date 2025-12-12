@@ -52,7 +52,7 @@ export default {
   },
 };
 </script>
-
+<template>
   <!-- รายการแปลง -->
   <h3 @click="isListOpen = !isListOpen" style="cursor: pointer">
     รายการแปลง
