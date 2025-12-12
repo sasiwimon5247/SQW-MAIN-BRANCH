@@ -1,3 +1,25 @@
+<!-- <script>
+  export default {
+    methods: {
+
+    selectMode(mode) {
+      this.currentMode = mode;
+      // Show the centered disclaimer modal after mode selection
+      this.showModeDisclaimerModal = true;
+    },
+    
+    backToModeSelect() {
+      this.currentMode = null;
+    }
+
+    }
+}
+</script> -->
+
+<script src="../../app-script2.js"></script>
+<style>@import "../../styles/app.css";</style>
+
+
 <template>
   <!-- หน้าเลือกโหมด (ขึ้นเมื่อเปิดครั้งแรก)-->
   <h2>เลือกโหมดการใช้งาน</h2>
@@ -12,6 +34,3 @@
     </button>
   </div>
 </template>
-
-<script src="../../app-script2.js"></script>
-<style>@import "../../styles/app.css";</style>
