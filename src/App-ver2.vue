@@ -22,19 +22,24 @@
       <RouterView v-if="false" />
     </header>
     <div v-if="showModeDisclaimerModal" class="mode-disclaimer-overlay">
-        <ModeDisclaimerModal />
+        <ModeDisclaimerModal @close="showModeDisclaimerModal = false" />
     </div>
     <div v-if="!currentMode" class="mode-select fullscreen">
-        <ModeSelect />
+      <!-- เวลาเลือกโหมด จะ emit event 'select' ขึ้นมา → เรียก method selectMode ใน app-script2.js -->
+      <ModeSelect @select="selectMode" />
     </div>
     <div v-else-if="currentMode === 'sale'">
       <nav class="navbar">
         <MapControls />
-        <LandDashboard />
+        <LandDashboard :dashboard="dashboard" />
         <ActionButtons />
         <div class="form-section">
-            <LandInfoForm />
-            <LandListPanel />
+          <LandInfoForm :landData="landData" @save="saveLandData" />
+          <LandListPanel
+            :savedLands="savedLands"
+            @focus-land="focusLand"
+            @delete-land="deleteLandItem"
+          />
         </div>
       </nav>
     </div>
@@ -45,7 +50,14 @@
     </main>
     <section class="right-panel">
       <MapContainer />
-      <SearchPanel />
+      <SearchPanel
+        :showSearch="showSearch"
+        :searchQuery="searchQuery"
+        @update:searchQuery="searchQuery = $event"
+        @search="performSearch"
+        @locate-gps="locateByGPS"
+        @close="showSearch = false"
+      />
       <FiltersPanel
         :showFilters="showFilters"
         :filters="filters"
@@ -53,7 +65,26 @@
         @reset="resetFilters"
         @close="showFilters = false"
       />
-      <P2PChatPanel />
+      <P2PChatPanel
+        :showChat="showChat"
+        :chatMode="chatMode"
+        :messages="chatMessages"
+        :chatRooms="chatRooms"
+        :onlineUsers="onlineUsers"
+        :selectedUser="selectedUser"
+        :chatInput="chatInput"
+        :tempUserName="tempUserName"
+        :userProfile="userProfile"
+        :unreadCount="unreadCount"
+        @update:chatInput="chatInput = $event"
+        @update:tempUserName="tempUserName = $event"
+        @set-profile="setUserProfile"
+        @select-user="selectUserToChat"
+        @select-room="selectChatRoom"
+        @back-to-rooms="backToRooms"
+        @send="sendMessage"
+        @close="showChat = false"
+      />
     </section>
   </div>
 </template>

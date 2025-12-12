@@ -1,52 +1,92 @@
+<style>@import "../../styles/app.css";</style>
+
+<script>
+export default {
+  name: "MapControls",
+
+  props: {
+    hasNewMessage: {
+      type: Boolean,
+      default: false,
+    },
+    unreadCount: {
+      type: Number,
+      default: 0,
+    },
+  },
+
+  emits: ["toggle-search", "toggle-filters", "toggle-p2p"],
+
+  methods: {
+    onToggleSearch() {
+      this.$emit("toggle-search");
+    },
+    onToggleFilters() {
+      this.$emit("toggle-filters");
+    },
+    onToggleP2P() {
+      this.$emit("toggle-p2p");
+    },
+  },
+};
+</script>
+
 <template>
-  <div
-    class="control-section"
-    style="
-      margin-top: 8px;
-      background: #fff1;
-      padding: 8px;
-      border-radius: 8px;
-    "
-  >
-    <div>
-      <button @click="addBangkokOverlay('bma2556')">ผังเมือง กทม. 2556</button>
-      <button @click="addBangkokOverlay('bma2570_draft')">
-        ผังเมือง กทม. 2570 (ร่าง)
-      </button>
-      <button @click="clearBangkokOverlay">ซ่อนผังเมือง</button>
+  <!-- Map Control Buttons -->
+  <div class="map-controls">
+    <!-- Search Button -->
+    <button
+      class="control-btn search-btn"
+      @click="onToggleSearch"
+      title="Search"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <circle cx="11" cy="11" r="8" />
+        <path d="m21 21-4.35-4.35" />
+      </svg>
+    </button>
 
-      <label class="checkbox-label">Opacity (ผัง กทม.)</label>
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.05"
-        :value="kmlOpacity"
-        @input="setBangkokOverlayOpacity($event.target.value)"
-      />
-      <span style="font-size: 12px">{{ kmlOpacity.toFixed(2) }}</span>
-    </div>
+    <!-- Filters Button -->
+    <button
+      class="control-btn filter-btn"
+      @click="onToggleFilters"
+      title="Filters"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46" />
+      </svg>
+    </button>
 
-    <label class="checkbox-label" style="margin-top: 8px">
-      <input type="checkbox" :checked="dolEnabled" @change="onToggleDol" />
-      <span class="checkmark">{{ dolEnabled ? '✓' : '' }}</span>
-      ระวางกรมที่ดินสีแดง
-    </label>
-    <div class="opacity-control" v-if="dolEnabled">
-      <label class="checkbox-label">Opacity</label>
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        :value="dolOpacity"
-        class="slider"
-        @input="onChangeDolOpacity($event.target.value)"
-      />
-      <span class="opacity-value">{{ dolOpacity.toFixed(2) }}</span>
-    </div>
+    <!-- P2P Chat Button -->
+    <button
+      class="control-btn p2p-btn"
+      :class="{ 'has-notification': hasNewMessage }"
+      @click="onToggleP2P"
+      title="P2P Chat"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+        />
+      </svg>
+      <span v-if="unreadCount > 0" class="notification-badge">
+        {{ unreadCount }}
+      </span>
+    </button>
   </div>
 </template>
-
-<script src="../../app-script2.js"></script>
-<style>@import "../../styles/app.css";</style>

@@ -1,147 +1,101 @@
+<style>@import "../../styles/app.css";</style>
+
+<script>
+/* eslint-disable vue/no-mutating-props */
+export default {
+  name: "FiltersPanel",
+  props: {
+    showFilters: {
+      type: Boolean,
+      default: false,
+    },
+    // ให้ default เป็น {} เพื่อกันกรณี parent เผลอไม่ส่ง
+    filters: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  emits: ["apply", "reset", "close"],
+};
+</script>
+
 <template>
   <!-- Filters Panel -->
   <div class="filters-panel" v-show="showFilters">
     <div class="panel-header">
       <h3>ตัวกรอง</h3>
-      <button @click="showFilters = false" class="close-btn">×</button>
-    </div>
-    <div class="filter-group">
-      <label>ขนาดถนน</label>
-      <!-- สำคัญ: ให้ v-model ชี้ที่ filters.roadWidth -->
-      <select v-model="filters.roadWidth" class="form-select">
-        <option value="">ทั้งหมด</option>
-        <option value="lt6">ต่ำกว่า 6 เมตร</option>
-        <option value="6-9.99">ตั้งแต่ 6–9.99 เมตร</option>
-        <option value="ge10">ตั้งแต่ 10 เมตรขึ้นไป</option>
-        <option value="ge18">ตั้งแต่ 18 เมตรขึ้นไป</option>
-        <option value="ge30">30 เมตรขึ้นไป</option>
-      </select>
-    </div>
-    <div class="form-group" style="display: flex; gap: 10px">
-      <div class="filter-group">
-        <label>ขนาดพื้นที่ (ตร.วา)</label>
-        <div class="price-range">
-          <input
-            type="text"
-            :value="formatNumber(filters.areaMin)"
-            @input="filters.areaMin = unformatNumber($event.target.value)"
-            placeholder="ต่ำสุด"
-            class="price-input"
-            style="width: 50%"
-          />
-          <input
-            type="text"
-            :value="formatNumber(filters.areaMax)"
-            @input="filters.areaMax = unformatNumber($event.target.value)"
-            placeholder="สูงสุด"
-            class="price-input"
-            style="width: 50%"
-          />
-        </div>
-      </div>
-      <div class="filter-group">
-        <label>ขนาดพื้นที่ (ไร่)</label>
-        <div class="price-range">
-          <input
-            type="text"
-            :value="formatNumber(filters.areaMinRai)"
-            @input="
-              filters.areaMinRai = unformatNumber($event.target.value)
-            "
-            placeholder="ต่ำสุด"
-            class="price-input"
-            style="width: 50%"
-          />
-          <input
-            type="text"
-            :value="formatNumber(filters.areaMaxRai)"
-            @input="
-              filters.areaMaxRai = unformatNumber($event.target.value)
-            "
-            placeholder="สูงสุด"
-            class="price-input"
-            style="width: 50%"
-          />
-        </div>
-      </div>
+      <button class="close-btn" @click="$emit('close')">×</button>
     </div>
 
-    <div class="filter-group">
-      <label>ช่วงราคา (บาท : ตร.วา)</label>
-      <div class="price-range" style="display: flex; gap: 10px">
+    <div class="filters-body">
+      <!-- ตัวอย่างฟิลด์ สามารถเพิ่ม/ลดตามของเดิมได้เลย -->
+      <div class="form-group">
+        <label>ประเภทที่ดิน</label>
+        <select class="form-input" v-model="filters.landType">
+          <option value="">ทั้งหมด</option>
+          <option value="chanote">โฉนด</option>
+          <option value="nor_sor_3">นส.3 / นส.3ก</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>ความกว้างถนน (เมตรขึ้นไป)</label>
         <input
-          type="text"
-          :value="formatNumber(filters.priceMin)"
-          @input="filters.priceMin = unformatNumber($event.target.value)"
-          placeholder="ต่ำสุด"
-          class="price-input"
-          style="width: 50%"
-        />
-        <input
-          type="text"
-          :value="formatNumber(filters.priceMax)"
-          @input="filters.priceMax = unformatNumber($event.target.value)"
-          placeholder="สูงสุด"
-          class="price-input"
-          style="width: 50%"
+          type="number"
+          class="form-input"
+          v-model="filters.roadWidth"
+          placeholder="เช่น 6"
         />
       </div>
-    </div>
-    <div class="filter-group">
-      <label>ช่วงราคา (รวมทั้งแปลง)</label>
-      <div class="price-range" style="display: flex; gap: 10px">
+
+      <div class="form-group">
+        <label>ขนาดที่ดินขั้นต่ำ (ตารางวา)</label>
         <input
-          type="text"
-          :value="formatNumber(filters.totalPriceMin)"
-          @input="
-            filters.totalPriceMin = unformatNumber($event.target.value)
-          "
-          placeholder="ต่ำสุด"
-          class="price-input"
-          style="width: 50%"
-        />
-        <input
-          type="text"
-          :value="formatNumber(filters.totalPriceMax)"
-          @input="
-            filters.totalPriceMax = unformatNumber($event.target.value)
-          "
-          placeholder="สูงสุด"
-          class="price-input"
-          style="width: 50%"
+          type="number"
+          class="form-input"
+          v-model="filters.areaMin"
+          placeholder="เช่น 100"
         />
       </div>
-    </div>
-    <div class="filter-group">
-      <label>หน้ากว้างที่ดิน (เมตร)</label>
-      <div class="price-range" style="display: flex; gap: 10px">
+
+      <div class="form-group">
+        <label>ขนาดที่ดินสูงสุด (ตารางวา)</label>
         <input
-          type="text"
-          :value="formatNumber(filters.frontMin)"
-          @input="filters.frontMin = unformatNumber($event.target.value)"
-          placeholder="ต่ำสุด"
-          class="price-input"
-          style="width: 50%"
+          type="number"
+          class="form-input"
+          v-model="filters.areaMax"
+          placeholder="เช่น 400"
         />
+      </div>
+
+      <div class="form-group">
+        <label>ราคาต่อตารางวา ขั้นต่ำ</label>
         <input
-          type="text"
-          :value="formatNumber(filters.frontMax)"
-          @input="filters.frontMax = unformatNumber($event.target.value)"
-          placeholder="สูงสุด"
-          class="price-input"
-          style="width: 50%"
+          type="number"
+          class="form-input"
+          v-model="filters.priceMin"
+          placeholder="เช่น 5000"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>ราคาต่อตารางวา สูงสุด</label>
+        <input
+          type="number"
+          class="form-input"
+          v-model="filters.priceMax"
+          placeholder="เช่น 15000"
         />
       </div>
     </div>
 
-    <div class="flex gap-2">
-      <button class="btn btn-primary" @click="applyFilters">
+    <div class="panel-footer">
+      <button class="btn btn-outline-secondary" @click="$emit('reset')">
+        ล้างตัวกรอง
+      </button>
+      <button class="btn btn-primary" @click="$emit('apply')">
         ใช้ตัวกรอง
       </button>
-      <button class="btn btn-secondary" @click="resetFilters">ล้าง</button>
     </div>
   </div>
 </template>
-
-<script src="../../app-script2.js"></script>
-<style>@import "../../styles/app.css";</style>
